@@ -1,0 +1,11 @@
+"policy","present","avg_MMR","avg_exempt","n_states"
+"edu",0,91,4.71,38
+"edu",1,91,5.6,7
+"edu_form",0,90.8,4.96,41
+"edu_form",1,93.3,3.83,4
+"form",0,93.4,3.11,8
+"form",1,90.5,5.2,37
+"in_personHD",0,90.6,5.01,35
+"in_personHD",1,92.6,4.27,10
+"notarize",0,91.2,5.01,34
+"notarize",1,90.4,4.42,11

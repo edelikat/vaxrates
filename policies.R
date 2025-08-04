@@ -130,3 +130,14 @@ kable(doc_effects, caption = "Adjusted Effects of Documentation Policies on MMR 
 write.csv(doc_effects, "policy_effects_summary.csv", row.names = FALSE)
 
 
+dt[!is.na(policy_group), .(
+        mean_MMR = mean(perc_MMR, na.rm = TRUE),
+        mean_exempt = mean(perc_exempt, na.rm = TRUE)
+), by = .(policy_group, state)]
+
+ggplot(dt[!is.na(policy_group)], aes(x = reorder(state, perc_MMR), y = perc_MMR, fill = policy_group)) +
+        geom_bar(stat = "identity") +
+        coord_flip() +
+        facet_wrap(~ policy_group) +
+        labs(title = "MMR Rates by State and Policy Group", x = "State", y = "MMR Rate (%)") +
+        theme_minimal()

@@ -18,6 +18,19 @@ dt_filtered <- dt %>%
 mod_exempttype <- lm(perc_MMR ~ nonmed_nonrel_exempt, data = dt_filtered)
 summary(mod_exempttype)
 
+## Compare states only allowing religious exemptions with those allowing all nonmedical exemptions and with those not allowing nonmedical exemptions
+#Create categorical variable
+dt$exempt_type <- with(dt, 
+                       ifelse(rel_exempt == 0 & nonmed_nonrel_exempt == 0, "None",
+                              ifelse(rel_exempt == 1 & nonmed_nonrel_exempt == 0, "Religious Only",
+                                     "Religious + Philosophical")))
+
+dt$exempt_type <- factor(dt$exempt_type, levels = c("None", "Religious Only", "Religious + Philosophical"))
+#run model
+mod_exempttype3 <- lm(perc_MMR ~ exempt_type, data = dt)
+summary(mod_exempttype3)
+
+
 ## In states allowing non-medical exemptions, how does requiring a standardized state exemption form correlate to MMR rates and exemption rates
 # Filter to states that allow religious exemptions
 rel_states <- subset(dt, rel_exempt == 1)
